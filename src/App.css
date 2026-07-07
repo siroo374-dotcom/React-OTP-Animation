@@ -1,0 +1,230 @@
+:root {
+  --bg-color: #0b0f19;
+  --container-bg: #111827;
+  --box-bg: rgba(255, 255, 255, 0.04);
+  --border-color: #374151;
+  --active-border: #6366f1;
+  --success-color: #10b981;
+  
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  
+  /* Adjusted Sizes for Perfect Fit */
+  --box-size: 50px; 
+  --gap-size: 12px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: radial-gradient(circle at top, #1e1b4b 0%, var(--bg-color) 40%);
+  color: var(--text-main);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app-layout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.container {
+  background: var(--container-bg);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 48px 40px; /* Adjusted padding to free up horizontal space */
+  border-radius: 32px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 460px; /* Slightly wider to guarantee fit without stretching */
+}
+
+.icon-wrapper {
+  width: 64px;
+  height: 64px;
+  background: rgba(99, 102, 241, 0.1);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 24px;
+  transition: all 0.4s ease;
+}
+
+.icon-wrapper.success {
+  background: rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.2);
+}
+
+.title {
+  font-size: 26px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  color: var(--text-main);
+}
+
+.subtitle {
+  font-size: 15px;
+  color: var(--text-muted);
+  margin: 0 0 40px 0;
+}
+
+/* === Grid System for Perfect Center Merging === */
+.otp-animation-wrapper {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: var(--box-size);
+}
+
+.otp-container {
+  grid-area: 1 / 1;
+  display: flex;
+  gap: var(--gap-size);
+}
+
+.otp-box-wrapper {
+  position: relative;
+  width: var(--box-size);
+  height: var(--box-size);
+  border-radius: 14px;
+  background: var(--box-bg);
+  border: 1.5px solid var(--border-color);
+}
+
+.otp-box-wrapper.active {
+  border-color: var(--active-border);
+  background: rgba(99, 102, 241, 0.05);
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+}
+
+.otp-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: transparent;
+  text-shadow: 0 0 0 transparent;
+  caret-color: transparent;
+  cursor: text;
+  z-index: 2;
+}
+
+.digit-display {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text-main);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* The Merged Success Box */
+.merged-success-box {
+  grid-area: 1 / 1;
+  height: var(--box-size);
+  background: var(--success-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.4);
+  overflow: hidden;
+  width: var(--box-size); 
+}
+
+.success-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 17px;
+  white-space: nowrap;
+}
+
+/* Button & Links */
+.verify-btn {
+  width: 100%;
+  border-radius: 14px;
+  border: none;
+  background: var(--active-border);
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.verify-btn:disabled {
+  background: #374151;
+  color: #6b7280;
+  cursor: not-allowed;
+}
+
+.verify-btn:not(:disabled):hover {
+  background: #4f46e5;
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
+}
+
+.resend-text {
+  margin-top: 28px;
+  font-size: 14px;
+  color: var(--text-muted);
+  display: flex;
+  gap: 8px;
+}
+
+.resend-link {
+  color: var(--active-border);
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 14px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.resend-link:disabled {
+  color: var(--border-color);
+  cursor: default;
+}
+
+@media (max-width: 480px) {
+  .app-layout { padding: 0; }
+  .container {
+    padding: 40px 24px;
+    border-radius: 0;
+    min-height: 100vh;
+    border: none;
+    background: var(--bg-color);
+    justify-content: center;
+  }
+  :root { 
+    --box-size: 45px; 
+    --gap-size: 8px;
+  }
+  .digit-display { font-size: 20px; }
+}
